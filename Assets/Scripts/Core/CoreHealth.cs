@@ -6,7 +6,7 @@ public class CoreHealth : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
 
-    public UnityEvent<float> OnHealthChanged;
+    public UnityEvent OnHealthChanged;
     public UnityEvent OnCoreDead;
 
     void Start()
@@ -17,13 +17,18 @@ public class CoreHealth : MonoBehaviour, IDamageable
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
-        OnHealthChanged?.Invoke(currentHealth / maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        float percent = currentHealth / maxHealth;
+        GameEventManager.Instance?.ReportCoreHealthChanged(percent);
+        OnHealthChanged?.Invoke();
 
         if (IsDead())
+        {
+            GameEventManager.Instance?.ReportCoreDestroyed();
             OnCoreDead?.Invoke();
+        }
     }
 
     public bool IsDead() => currentHealth <= 0;
-
-    public float GetHealthPercent() => currentHealth / maxHealth;
 }
