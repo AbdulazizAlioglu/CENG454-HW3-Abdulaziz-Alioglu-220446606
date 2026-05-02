@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable, IPoolable
 
     public void OnDespawn()
     {
+        OnEnemyDied.RemoveAllListeners();
         gameObject.SetActive(false);
     }
 }
