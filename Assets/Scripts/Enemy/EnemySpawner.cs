@@ -49,5 +49,13 @@ public class EnemySpawner : MonoBehaviour
         ObjectPool.Instance.ReturnEnemy(enemyObj);
     });
     currentEnemies++;
+
+    // Her 3. düşman hızlı olsun
+    if (currentEnemies % 3 == 0)
+    {
+        SpeedBoostDecorator decorator = enemyObj.AddComponent<SpeedBoostDecorator>();
+        decorator.Init(enemy);
+        decorator.Apply();
+    }
 }
 }

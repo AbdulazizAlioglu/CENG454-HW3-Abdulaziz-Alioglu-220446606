@@ -10,4 +10,7 @@ public class DirectMoveStrategy : MonoBehaviour, IEnemyStrategy
         enemy.position += direction * speed * Time.deltaTime;
         enemy.LookAt(target);
     }
+
+    public float GetSpeed() => speed;
+    public void SetSpeed(float newSpeed) => speed = newSpeed;
 }
