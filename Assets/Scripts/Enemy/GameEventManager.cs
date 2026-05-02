@@ -14,10 +14,14 @@ public class GameEventManager : MonoBehaviour
     [SerializeField] private int enemiesToWin = 10;
 
     void Awake()
+{
+    if (Instance == null)
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
+    else Destroy(gameObject);
+}
 
     public void ReportCoreHealthChanged(float percent)
     {
