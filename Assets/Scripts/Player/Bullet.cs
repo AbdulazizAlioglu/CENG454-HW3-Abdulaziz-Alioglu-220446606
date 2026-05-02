@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
     public void OnDespawn()
     {
-        gameObject.SetActive(false);
+        ObjectPool.Instance.ReturnBullet(gameObject);
     }
 
     void Update()

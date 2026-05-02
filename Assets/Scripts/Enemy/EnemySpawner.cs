@@ -28,22 +28,26 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void SpawnEnemy()
+{
+    float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
+    Vector3 spawnPos = new Vector3(
+        Mathf.Cos(angle) * spawnRadius,
+        0,
+        Mathf.Sin(angle) * spawnRadius
+    );
+
+    GameObject enemyObj = ObjectPool.Instance.GetEnemy(spawnPos, Quaternion.identity);
+    Enemy enemy = enemyObj.GetComponent<Enemy>();
+
+    IEnemyStrategy strategy = enemyObj.GetComponent<IEnemyStrategy>();
+    enemy.Initialize(coreTransform, strategy);
+    enemy.OnSpawn();
+
+    enemy.OnEnemyDied.AddListener(() =>
     {
-        float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-        Vector3 spawnPos = new Vector3(
-            Mathf.Cos(angle) * spawnRadius,
-            0,
-            Mathf.Sin(angle) * spawnRadius
-        );
-
-        GameObject enemyObj = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-        Enemy enemy = enemyObj.GetComponent<Enemy>();
-
-        IEnemyStrategy strategy = enemyObj.GetComponent<IEnemyStrategy>();
-        enemy.Initialize(coreTransform, strategy);
-        enemy.OnSpawn();
-
-        enemy.OnEnemyDied.AddListener(() => currentEnemies--);
-        currentEnemies++;
-    }
+        currentEnemies--;
+        ObjectPool.Instance.ReturnEnemy(enemyObj);
+    });
+    currentEnemies++;
+}
 }

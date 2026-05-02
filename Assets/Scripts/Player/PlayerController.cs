@@ -27,14 +27,14 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleShooting()
+{
+    if (Input.GetKeyDown(KeyCode.Space))
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (firePoint != null)
         {
-            if (bulletPrefab != null && firePoint != null)
-            {
-                GameObject b = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                b.GetComponent<Bullet>().OnSpawn();
-            }
+            GameObject b = ObjectPool.Instance.GetBullet(firePoint.position, firePoint.rotation);
+            b.GetComponent<Bullet>().OnSpawn();
         }
     }
+}
 }
