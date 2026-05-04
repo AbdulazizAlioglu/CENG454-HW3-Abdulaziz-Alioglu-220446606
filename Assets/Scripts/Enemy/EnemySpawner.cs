@@ -21,12 +21,13 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
+
             if (currentEnemies < maxEnemies)
                 SpawnEnemy();
         }
     }
 
-    private void SpawnEnemy()
+     private void SpawnEnemy()
     {
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
         Vector3 spawnPos = new Vector3(
