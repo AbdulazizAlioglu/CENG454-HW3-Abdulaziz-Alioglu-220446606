@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour, IDamageable, IPoolable
         if (IsDead())
         {
             OnEnemyDied?.Invoke();
+            AudioManager.Instance?.PlayEnemyDeath();
             GameEventManager.Instance?.ReportEnemyKilled();
             OnDespawn();
         }

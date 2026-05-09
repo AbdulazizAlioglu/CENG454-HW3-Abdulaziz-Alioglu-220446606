@@ -32,12 +32,14 @@ public class GameUI : MonoBehaviour
     private void ShowWinPanel()
     {
         if (winPanel) winPanel.SetActive(true);
+        AudioManager.Instance?.PlayWin();
         Time.timeScale = 0f;
     }
 
     private void ShowLosePanel()
     {
         if (losePanel) losePanel.SetActive(true);
+        AudioManager.Instance?.PlayLose();
         Time.timeScale = 0f;
     }
 }

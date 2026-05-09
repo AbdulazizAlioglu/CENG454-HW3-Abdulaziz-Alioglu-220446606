@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 {
     if (Input.GetKeyDown(KeyCode.Space))
     {
+        AudioManager.Instance?.PlayShoot();
         if (firePoint != null)
         {
             GameObject b = ObjectPool.Instance.GetBullet(firePoint.position, firePoint.rotation);

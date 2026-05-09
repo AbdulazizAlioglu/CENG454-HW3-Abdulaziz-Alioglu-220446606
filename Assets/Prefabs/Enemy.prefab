@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7439285251063386556}
   - component: {fileID: 8380033942229248917}
   - component: {fileID: 1606095219579911699}
+  - component: {fileID: -5757019477263183455}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -198,3 +199,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DirectMoveStrategy
   speed: 3
+--- !u!114 &-5757019477263183455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945370396909514744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01231b9c5b1e50e4ba8b5d7f58de5134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CircleMoveStrategy
+  speed: 2
+  circleRadius: 5

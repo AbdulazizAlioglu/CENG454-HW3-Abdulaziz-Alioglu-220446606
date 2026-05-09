@@ -16,12 +16,14 @@ public class CoreHealth : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
+        Debug.Log("Core TakeDamage called");
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         float percent = currentHealth / maxHealth;
         GameEventManager.Instance?.ReportCoreHealthChanged(percent);
         OnHealthChanged?.Invoke();
+        AudioManager.Instance?.PlayCoreHit();
 
         if (IsDead())
         {
